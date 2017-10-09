@@ -1,6 +1,7 @@
 <?php
+require_once 'config.inc';
     $dir = getcwd();
-    $dir .= "\\uploads\\";
+    $dir .= $_GLOBALS['UPLOAD_DIR'];
 	echo '<HR>';
     echo '<H2>Список файлов</H2>';
     if(is_dir($dir))
@@ -12,8 +13,6 @@
 			{
                 if($file == '.' || $file == '..') continue;				
                 echo ++$i.". <A HREF = \"uploads/$file\">$file</A></BR>";
-				
-				//echo '<br/>'.$i;
             }
         }
         closedir($dh);

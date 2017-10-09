@@ -5,8 +5,11 @@
 	</HEAD>
 	<BODY>
 		<H1>Hello, files</H1>
+                
 <?php
-	include_once 'viewfiles.php';		
-?>		
+    require_once 'config.inc';
+    include_once 'viewfiles.php';		
+?>
+
 	</BODY>
 </HTML>
