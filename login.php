@@ -27,8 +27,14 @@
         $result->close;
         $conn->close;        
         
+        session_start();
+        
         if ($rows)
         {
+            setcookie('username', $UserLog, time() + 60 * 60 * 24 * 7, '/');
+            setcookie('password', $UserPas, time() + 60 * 60 * 24 * 7, '/');
+            $_SESSION['login'] = $UserLog;
+            $_SESSION['password'] = $UserPas;         
             header ('Location: index.php');
         }
         else
