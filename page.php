@@ -1,8 +1,5 @@
 <?php
 
-/*
-
- */
 
 function htmlGetHeader() {
     $header = '<!DOCTYPE html><html><head>' .
@@ -20,7 +17,7 @@ function htmlGetHeader() {
 }
 
 function htmlGetContent($loggedIn) {
-    $content = htmlGetPersonal($loggedIn) . '
+    $content = '
         <div id="nav-top" class="minWidth gradient">
             <div style="border: 0; display: inline-block; margin: 5px;">
                 <ul id="menu-top">
@@ -47,7 +44,8 @@ function htmlGetContent($loggedIn) {
             <div id="content">
                 <div>Наполнение</div>
                 <ul>' .
-            filesGetList() .
+            ($loggedIn ? filesGetList() : '<h3>Просмотр файлов доступен только зарегистрированным</h3>')
+            .
             '</ul>
             </div>
             </div>'
@@ -59,40 +57,26 @@ function htmlGetPersonal($loggedIn) {
     if ($loggedIn) {
         $name = $_SESSION['login'];
         $modal = '';
-        $links = '<li><a href ="./logout.php">exit</a></li>';
+        $links = '<li><a id="exitlnk" href ="./logout.php">Выход</a></li>';
     } else {
         $name = 'Гость';
         $modal = '<div id="modal_back">
-                <div id="form_container"><a onclick="$(\'#modal_back\').css(\'display\', \'none\')">close</a>
+                <div id="form_container"><a id="modal_close" href="#"></a>
                     <form id="login_form" action="login.php" method="POST">
-                        <legend>Вход на сайт</legend>
-                        <table>
-                            <tr>
-                                <td>Логин:</td><td><input type="text" name="ulog" required /></td>
-                            </tr>
-                            <tr>
-                                <td>Пароль:</td><td><input type="password" name="upas" required /></td>
-                            </tr>
-                        </table></br>
+                        <label>Вход на сайт</label>
+                        <label>Логин:<input type="text" name="ulog" required /></label>
+                        <label>Пароль:<input type="password" name="upas" required /></label>
                         <input type="submit" value="Войти" />
                     </form>
-                    <form id="register_form" action="register.php" method="POST" onsubmit="return validate(this)">
-                        <legend>Регистрация на сайте</legend>
-                        <table>
-                            <tr>
-                                <td>Логин:</td><td><input type="text" name="rulog" required placeholder="введите логин"/></td>
-                            </tr>
-                            <tr>
-                                <td>Пароль:</td><td><input type="password" name="rupas" required /></td>
-                            </tr>
-                            <tr>
-                                <td>Имя:</td><td><input type="text" name="runame" required /></td>
-                            </tr>
-                            <tr>
-                                <td>Электронная почта:</td><td><input type="text" name="rumail" required placeholder="почта" /></td>
-                            </tr>
-                        </table></br>
+                    <form id="register_form" action="register.php" method="POST" onsubmit="return checkInput(this)">
+                        <label>Регистрация на сайте</label>
+                        <label>Логин:<input type="text" name="userLogin" required="required" placeholder="Введите логин" size="25"/></label>
+                        <label>Пароль:<input type="password" name="userPasw" required="required" placeholder="Введите пароль" size="25"/></label>
+                        <label>Повторите пароль:<input type="password" name="userPaswС" required="required" placeholder="Введите пароль ещё раз" size="25"/></label>
+                        <label>Имя:<input type="text" name="userName" placeholder="Введите имя пользователя" size="50"/></label>
+                        <label>Электронная почта<input type="text" name="userMail" required="required" placeholder="Введите адрес почты" size="50"/></label>
                         <input type="submit" value="Зарегистрировать" />
+                        <input type="hidden" name="regFrm" value="y" />
                     </form>
                 </div>
             </div>';
@@ -105,8 +89,8 @@ function htmlGetPersonal($loggedIn) {
             <div id="logo" class="inline-blck">
                 <h1 style="margin-left: 60px; margin-top: 10px;  ">Файл-хостинг</h1>
             </div>
-            <div id="personal" class="inline-blck">                
-                <a>Hello, ' . $name . '</a> 
+            <div id="personal" class="inline-blck">
+                <a>Hello, ' . $name . '</a>
                 <ul>'.$links.
                 '</ul>
             </div>
@@ -122,4 +106,3 @@ function htmlGetFooter() {
     return $footer;
 }
 ?>
-

@@ -17,6 +17,11 @@ function dbQuery($query) {
     return $result;
 }
 
+function getLastId() {
+    global $db_conn;
+    return $db_conn->insert_id;    
+}
+
 function mysql_entities_fix_string(/* $connection, */ $string) {
     return htmlentities(mysql_fix_string(/* $db_conn, */ $string));
 }
