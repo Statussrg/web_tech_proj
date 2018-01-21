@@ -70,6 +70,19 @@ function filesGetList($search_str) {
     return $fileList;
 }
 
+function filesReadWeather() {
+    $dir = getcwd() . '\\parser\\iwx\\';
+    $lines = file($dir . 'weather2.txt');
+    if ($lines) {
+        foreach ($lines as $line_no => $line){
+            $result[$line_no] = mb_convert_encoding($line, 'utf-8', 'windows-1251');
+        }
+    } else {
+        $result = FALSE;
+    }
+    return $result;
+}
+
 function filesDownload($fn) {
     $dir = getcwd();
     global $uplDir;
