@@ -4,12 +4,10 @@
         <title>Форма регистрации</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <style>
-            /* input[required="required"]:before{
-                 content: "***aeg";
-                 color: red;
-             }*/
-            input[type='text'], input[type='password'] {width: 200px;}
 
+            input[type='text'], input[type='password'] {width: 200px;}
+            input[required] {border: 2px groove ;}
+            tr{margin: 5px;}
 
         </style>
         <script type="text/javascript">
@@ -65,8 +63,8 @@
             }
 
             function checkPaswEq(field1, field2)
-            {                
-                return (field1 != field2) ? "Пароли не совпадают.\n" :"";                
+            {
+                return (field1 != field2) ? "Пароли не совпадают.\n" : "";
             }
 
             function checkEmail(field) {
@@ -81,12 +79,12 @@
             }
         </script>
     </head>
-    <body>        
+    <body>
         <div style="border: 0 /*1px solid black*/; text-align: right; width: 400px;">
             <form action="reg_chk.php" method="POST" onsubmit="return checkInput(this)">
                 <fieldset>
                     <legend>Регистрация на сайте</legend> 
-                    <table cellspacing="5px">
+                    <table>
                         <tr>
                             <td>Логин:</td><td><input type="text" name="userLogin" required="required" placeholder="Введите логин" size="25"/></td>
                         </tr>
