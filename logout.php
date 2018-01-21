@@ -4,6 +4,6 @@
     setcookie('password', $_SESSION['password'], time() - 100000, '/');
     unset($_SESSION['login']);
     unset($_SESSION['password']);    
-    header('location: login.php');
+    header('location: index.php');
 ?>
 

@@ -1,15 +1,26 @@
-<!DOCTYPE HTML>
-<HTML>
-	<HEAD>
-		<TITLE>File Hosting</TITLE>
-	</HEAD>
-	<BODY>
-		<FORM ENCTYPE="MULTIPART/FORM-DATA" ACTION="upload.php" METHOD="POST">
-			<INPUT TYPE="HIDDEN" NAME="MAX_FILE_SIZE" VALUE="30000" />
-			«¿√–”«»“‹ ‘¿…À:
-			<INPUT TYPE="FILE" NAME="MYFILE" />
-			<BR>
-			<INPUT TYPE="SUBMIT" VALUE="Œ“œ–¿¬»“‹ ‘¿…À" />
-		</FORM>
-	</BODY>
-</HTML>		
+<?php
+session_start();
+if /*(isset($_COOKIE['username']))*/
+    (isset($_SESSION['login']))
+    {
+echo <<< _PAGE
+    <!DOCTYPE HTML>
+    <HTML>
+        <HEAD>
+            <TITLE>–ó–∞–≥—Ä—É–∑–∫–∞ —Ñ–∞–π–ª–∞</TITLE>
+        </HEAD>
+        <BODY>
+            <FORM ENCTYPE="MULTIPART/FORM-DATA" ACTION="upload.php" METHOD="POST">
+                <INPUT TYPE="HIDDEN" NAME="MAX_FILE_SIZE" VALUE="30000" />
+                <LABEL>–í—ã–±–µ—Ä–∏—Ç–µ —Ñ–∞–π–ª:</LABEL>
+                <INPUT TYPE="FILE" NAME="myfile" />
+                <BR />
+                <INPUT TYPE="SUBMIT" VALUE="–ó–∞–≥—Ä—É–∑–∏—Ç—å" />
+            </FORM>
+        </BODY>
+    </HTML>		
+_PAGE;
+    }
+    else header("Location:index.php");
+    
+?>

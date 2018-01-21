@@ -16,17 +16,17 @@
     if ($UserLog)
     { 
         require_once ('config.inc');
-        $conn = new mysqli($db_host, $db_usr, $db_pwd, $db_base, $db_port);
-        if ($conn->connect_error) die($conn->connect_error);        
+        $db_conn = new mysqli($db_host, $db_usr, $db_pwd, $db_base, $db_port);
+        if ($db_conn->connect_error) die($db_conn->connect_error);        
 
-        if($UserLog) $UserLog = mysql_entities_fix_string($conn, $UserLog);
-        if($UserPas) $UserPas = sha1(mysql_entities_fix_string($conn,$UserPas));    
-        if($UserMail) $UserMail = mysql_entities_fix_string($conn,$UserMail); 
-        if($UserName) $UserName = mysql_entities_fix_string($conn,$UserName);         
+        if($UserLog) $UserLog = mysql_entities_fix_string($db_conn, $UserLog);
+        if($UserPas) $UserPas = sha1(mysql_entities_fix_string($db_conn,$UserPas));    
+        if($UserMail) $UserMail = mysql_entities_fix_string($db_conn,$UserMail); 
+        if($UserName) $UserName = mysql_entities_fix_string($db_conn,$UserName);         
         
         $query_chk = "SELECT * FROM t_users WHERE log = '$UserLog';";
-        $result_chk = $conn->query($query_chk);
-        if (!$result_chk) die ($conn-> error);
+        $result_chk = $db_conn->query($query_chk);
+        if (!$result_chk) die ($db_conn-> error);
         $rows_chk = $result_chk->num_rows;
         
         if ($rows_chk)
@@ -37,18 +37,18 @@
         {
             $query = "INSERT INTO t_users(log,pass,email,name) VALUES('$UserLog', '$UserPas', '$UserMail', '$UserName');";
 
-            $result = $conn->query($query);
-            if (!$result) die ($conn-> error);
+            $result = $db_conn->query($query);
+            if (!$result) die ($db_conn-> error);
             $rows = $result->num_rows;
             //echo $rows;
             $result->close;
         }       
         
-        $conn->close;
+        $db_conn->close;
         
         if ($rows_chk)
         {
-            header ('Location: register_frm.php');
+            header ('Location: register_frm.html');
         }
         else
         {
