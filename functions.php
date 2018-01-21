@@ -49,7 +49,7 @@ function filesGetList($search_str) {
                     continue;
                 if ($search_str && !substr_count($file, $search_str))
                     continue;
-                $href = $dir . $file;                
+                $href = $dir . $file;
                 $fileList .= "<li>[" . ++$i . "]$file<br/>"
                         . "<a href=\"?getfile=" . ($file) . "\">Скачать</a>&nbsp;"
                         . "<a href=\"?delfile=" . ($file) . "\">Удалить</a>"

@@ -39,26 +39,26 @@ ul{list-style-type: none;}
 
 /* personal */
 #personal{
-    height: 60px;    
+    height: 60px;
     float: right;
     border: 0;
     /*position: relative;  */
 }
 
 #personal > a{
-    display: block;    
-    text-align: right;    
+    display: block;
+    text-align: right;
     margin: 0;
     padding: 20px 0 3px;
     border: 0;
-    border-bottom: 1px dashed black;    
+    border-bottom: 1px dashed black;
     vertical-align: bottom;
 }
 
 #personal > ul{
     display: none;
     position: absolute;
-    z-index: 9;    
+    z-index: 9;
     background: white;
     border: 1px solid black;
     right: 100px;
@@ -68,13 +68,13 @@ ul{list-style-type: none;}
 
 #personal > ul li{
     display: block;
-    margin: 0;    
+    margin: 0;
     float: none;
 }
 #personal ul a{
     display: block;
     padding: 5px;
-    line-height: 1;    
+    line-height: 1;
     font:  90% sans-serif;
 }
 
@@ -90,8 +90,8 @@ ul{list-style-type: none;}
 }*/
 
 #personal > a:before {
-    content: " ";
-    width: 18px;    
+    content: "";
+    width: 18px;
     display: inline-block;
     height: 18px;
     padding: 0 3px;
@@ -103,37 +103,26 @@ ul{list-style-type: none;}
 
 
 
-#loglnk:before {
-    content: " ";
-    width: 18px;    
+#loglnk:before, #reglnk:before, #exitlnk:before, #perslnk:before {
+    content: "";
+    width: 18px;
     display: inline-block;
     height: 18px;
     padding: 0 3px;
     position: relative;
     top: 3px;
+}
+#loglnk:before{
     background: url(../images/key.png) no-repeat;
 }
-
 #reglnk:before {
-    content: " ";
-    width: 18px;    
-    display: inline-block;
-    height: 18px;
-    padding: 0 3px;
-    position: relative;
-    top: 3px;
     background: url(../images/locked.png) no-repeat;
 }
-
 #exitlnk:before {
-    content: " ";
-    width: 18px;    
-    display: inline-block;
-    height: 18px;
-    padding: 0 3px;
-    position: relative;
-    top: 2px;
     background: url(../images/door.png) no-repeat;
+}
+#perslnk:before {
+    background: url(../images/key.png) no-repeat;
 }
 
 /*  */
@@ -150,16 +139,6 @@ ul{list-style-type: none;}
     border-bottom: 0;
 }
 
-#content{
-    /*min-width: 380px;*/
-    min-height: 200px;
-    border-top: 0;
-    border-bottom: 0;
-    border-right: 0;
-    /*border: 1px solid black;*/
-    background:#fff;
-    /*width: 100%;*/
-}
 #footer{
     min-height: 60px;
     border: 1px solid #999;
@@ -193,9 +172,9 @@ ul{list-style-type: none;}
     float: left;
 }
 #menu-top > li:hover{
-    cursor: pointer;
+    /*cursor: pointer;
     color: blue;
-    text-decoration: underline;
+    text-decoration: underline;*/
 }
 
 /***********************************/
@@ -203,13 +182,14 @@ ul{list-style-type: none;}
     width: 200px;
     vertical-align: top;
     border: 0;
+    border-right: 1px solid #999;
     font: 90% sans-serif;
     float: left;
 }
 #nav-left > div{
-    display: block;
+    /*display: block;*/
     /*border: 1px solid black;*/
-    border-bottom: 0;
+    /*border-bottom: 0;*/
     padding: 3px;
     margin: 5px 5px 0 5px;
     text-align: center;
@@ -219,8 +199,9 @@ ul{list-style-type: none;}
 #nav-left > ul{
     display: block;
     border: 1px solid #999;
+    border-top: 0;
     margin: 0 5px 5px 5px;
-    padding: 0;
+    padding: 5px 0 0;
 }
 
 #nav-left > ul li{
@@ -228,19 +209,34 @@ ul{list-style-type: none;}
     border: 0; /*1px solid #999;*/
     border-bottom: 1px solid #999;
     padding-bottom: 2px;
-    margin: 5px;
+    margin: 0 5px 5px 5px;
 }
 
 #nav-left > ul li:hover{
-    cursor: pointer;
-    color: blue;
+    /*cursor: pointer;*/
+    /*color: blue;*/
     background: #f5f5f5;
     border-bottom: 1px solid blue;
 }
 
+#nav-left a{text-decoration: none;}
+
 /******************/
+#content{
+    /*min-width: 380px;*/
+    /*min-height: 200px;*/
+    border-top: 0;
+    border-bottom: 0;
+    border-right: 0;
+    /*border: 1px solid black;*/
+    background:#fff;
+    height: 100%;
+    position: relative;
+    left: -1px;
+    /*width: 100%;*/
+}
 #content > div{
-    display: block;
+    /*display: block;*/
     border: 0;
     border-bottom: 1px solid #ffbf00;
     padding: 3px;
@@ -249,14 +245,14 @@ ul{list-style-type: none;}
     /*text-align: center;*/
     /*background: #ddd;*/
 }
-#content > ul{
+#info{
     display: block;
     border: 0; /*1px solid #999;*/
     margin: 0 5px 5px 5px;
     padding: 0;
 }
 
-#content > ul li{
+.info_b li{
     background: url(../images/document.png) no-repeat;
     background-position: 5px center;
     display: inline-block;
@@ -273,7 +269,7 @@ ul{list-style-type: none;}
     overflow: hidden;
 }
 
-#content > ul li:hover{
+.info_b li:hover{
     background: url(../images/arrow_down.png) no-repeat;
     background-position: 5px center;
     cursor: pointer;
@@ -284,7 +280,47 @@ ul{list-style-type: none;}
     border-left: 3px solid #999;
 }
 
-#content a{font-size: 0.9em;}
+.info_b li:last-child{
+    background: url(../images/arrow_up.png) no-repeat;
+    background-position: 5px center;
+}
+
+.info_b a{font-size: 0.9em;}
+
+.info_l li{
+    background: url(../images/document.png) no-repeat;
+    background-position: 5px center;
+    display: block;
+    border: 1px solid #999;
+    border-bottom: 3px solid #999;
+    border-right: 3px solid #999;
+    padding: 5px 5px 5px 55px;
+    margin: 5px;
+    /*width: 250px;*/
+    height: 70px;
+    box-sizing: border-box;
+    font: 1.2em monospace;
+    text-align: left;
+    overflow: hidden;
+}
+
+.info_l li:hover{
+    background: url(../images/arrow_down.png) no-repeat;
+    background-position: 5px center;
+    cursor: pointer;
+    color: blue;
+    /*background: #f5f5f5;*/
+    border: 1px solid #999;
+    border-top: 3px solid #999;
+    border-left: 3px solid #999;
+}
+
+.info_l li:last-child{
+    background: url(../images/arrow_up.png) no-repeat;
+    background-position: 5px center;
+}
+
+.info_l a{font-size: 0.9em;}
 /*********/
 
 #footer{margin-bottom: 20px;}
@@ -318,7 +354,7 @@ ul{list-style-type: none;}
 
 #modal_close:after{
     content: "";
-    width: 18px;    
+    width: 18px;
     display: inline-block;
     height: 18px;
     padding: 0 3px;
@@ -347,15 +383,15 @@ ul{list-style-type: none;}
 #form_container form{
     display: block;
     position: relative;
-    top: 25px;    
+    top: 25px;
     /*border: 1px solid black;*/
     text-align: right;
     padding: 10px;
 }
 
 #form_container label{
-    display: block; 
-    margin: 5px; 
+    display: block;
+    margin: 5px;
     /*border: 1px solid black;*/
 }
 
@@ -374,6 +410,6 @@ form legend{
 }
 
 label:after > input[type='text']{
-    content: '*'; 
+    content: '*';
     color: red;
 }

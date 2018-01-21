@@ -105,7 +105,7 @@ function setHandlers()
                 $('#modal_back').css('display', 'none');
             });
 
-    $('#loglnk').click(
+    $('.cloglnk').click(
             function ()
             {
                 $('#modal_back').css('display', 'block');
@@ -114,22 +114,34 @@ function setHandlers()
                 $('#upload_form').css('display', 'none');
             });
 
-    $('#reglnk').click(
+    $('.creglnk').click(
             function ()
-            {                
+            {
                 $('#modal_back').css('display', 'block');
                 $('#login_form').css('display', 'none');
                 $('#register_form').css('display', 'block');
                 $('#upload_form').css('display', 'none');
             });
-    $('.upllnk').click(
+    $('.cupllnk').click(
             function ()
-            {                
+            {
                 $('#modal_back').css('display', 'block');
                 $('#login_form').css('display', 'none');
                 $('#register_form').css('display', 'none');
                 $('#upload_form').css('display', 'block');
-            });     
-            
-    $('.menu_l').click(function() { $('.menu_lc').slideToggle('fast') })            
+            });
+
+    $('.menu_l').click(function() { $('.menu_lc').slideToggle('fast'); });
+    
+    $('.view_l').click(function() { 
+        if ($('#info').hasClass('info_b')) {
+            $('#info').removeClass('info_b'); } 
+        $('#info').addClass('info_l');  }
+        );
+    
+    $('.view_b').click(function() { 
+        if ($('#info').hasClass('info_l')) {
+            $('#info').removeClass('info_l');}
+        $('#info').addClass('info_b');}
+        );
 }
