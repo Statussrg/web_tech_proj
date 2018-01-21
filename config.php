@@ -5,5 +5,8 @@
     $db_usr = 'root';
     $db_pwd = '';
     
+    
+    //$uplDir = DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR;
     $uplDir = '\\uploads\\';
+    $sitename = 'Файл-хостинг';
 ?>

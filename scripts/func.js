@@ -1,6 +1,14 @@
-function checkInput(form)
+function checkSearch(form)
+{   if (form.search_str.value == "")
+    {
+        alert("Пустой запрос");
+        return false;
+    }
+    else return true;
+}
+
+function checkInputR(form)
 {
-    ///alert('eeee');
     err = checkLogin(form.userLogin.value);
     err += checkName(form.userName.value);
     err += checkPasw(form.userPasw.value);
@@ -13,6 +21,19 @@ function checkInput(form)
         return false;
     }
 }
+
+function checkInputL(form)
+{
+    err = checkLogin(form.ulog.value);
+    err += checkPasw(form.upas.value);
+    if (err == "")
+        return true;
+    else {
+        alert(err);
+        return false;
+    }
+}
+
 function checkLogin(field)
 {
     if (field == "")
@@ -66,7 +87,7 @@ String.prototype.trim = function ()
 };
 
 
-
+/*
 function ajaxGetForm(vurl)
 {
     $.post('urlpost.php', {url: vurl}, function (data)
@@ -74,8 +95,7 @@ function ajaxGetForm(vurl)
         $('#lrforms').html(data);
     });
 }
-
-
+*/
 
 function setHandlers()
 {
@@ -91,6 +111,7 @@ function setHandlers()
                 $('#modal_back').css('display', 'block');
                 $('#login_form').css('display', 'block');
                 $('#register_form').css('display', 'none');
+                $('#upload_form').css('display', 'none');
             });
 
     $('#reglnk').click(
@@ -99,5 +120,16 @@ function setHandlers()
                 $('#modal_back').css('display', 'block');
                 $('#login_form').css('display', 'none');
                 $('#register_form').css('display', 'block');
+                $('#upload_form').css('display', 'none');
             });
+    $('.upllnk').click(
+            function ()
+            {                
+                $('#modal_back').css('display', 'block');
+                $('#login_form').css('display', 'none');
+                $('#register_form').css('display', 'none');
+                $('#upload_form').css('display', 'block');
+            });     
+            
+    $('.menu_l').click(function() { $('.menu_lc').slideToggle('fast') })            
 }

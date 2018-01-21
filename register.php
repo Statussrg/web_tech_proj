@@ -142,12 +142,12 @@ if ($userNotUniq) {
 if ($userInserted) {
     echo 'Пользователь добавлен в БД!<br/>ID = ' . $userInserted;
     $_SESSION['login'] = $userLogin;
-    $_SESSION['password'] = $userPasw;
+    $_SESSION['uname'] = $userName;
 } else {
     echo 'Пользователь <b>НЕ</b> добавлен в БД!<br/>';
 }
 
-echo '<a href="index.php">На главную</a>';
 ?>
+        <p><a href="./index.php">На главную</a></p>
     </body>
 </html>

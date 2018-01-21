@@ -19,7 +19,7 @@ function dbQuery($query) {
 
 function getLastId() {
     global $db_conn;
-    return $db_conn->insert_id;    
+    return $db_conn->insert_id;
 }
 
 function mysql_entities_fix_string(/* $connection, */ $string) {
@@ -35,13 +35,11 @@ function mysql_fix_string(/* $connection, */ $string) {
 }
 
 // список файлов
-function filesGetList() {
+function filesGetList($search_str) {
     $fileList;
-
     $dir = getcwd();
     global $uplDir;
     $dir .= $uplDir;
-    //$fileList = '<H2>Список файлов</H2><br/>'.$dir.'<br/><ul>';
     $fileList = '';
     if (is_dir($dir)) {
         $i = 0;
@@ -49,9 +47,13 @@ function filesGetList() {
             while (($file = readdir($dh)) !== false) {
                 if ($file == '.' || $file == '..')
                     continue;
-               // ++$i;
-                //$fileList .=  "<li>[".++$i ."] <a href = \"uploads/$file\">$file</a></li>";
-                $fileList .=  "<li>[".++$i ."]$file</li>";
+                if ($search_str && !substr_count($file, $search_str))
+                    continue;
+                $href = $dir . $file;                
+                $fileList .= "<li>[" . ++$i . "]$file<br/>"
+                        . "<a href=\"?getfile=" . ($file) . "\">Скачать</a>&nbsp;"
+                        . "<a href=\"?delfile=" . ($file) . "\">Удалить</a>"
+                        . "</li>";
             }
         }
         closedir($dh);
@@ -60,35 +62,61 @@ function filesGetList() {
             $fileList .= '<li>no files</li>';
         }
     }
-    $fileList .='<li><a href ="upload_frm.php">Загрузить ещё файл</a></li></ul>';
+    $fileList .= '<li><a class="upllnk" href ="#">Загрузить ещё файл</a></li></ul>';
+    if ($search_str)
+        $fileList .= '<a href ="./index.php">Показать все</a>';
     return $fileList;
+}
+
+function filesDownload($fn) {
+    $dir = getcwd();
+    global $uplDir;
+    $dir .= $uplDir;
+    if (is_dir($dir) && is_file($dir . $fn)) {
+        header("Content-Type: application/force-download; name=\"" . $fn . "\"");
+        header("Content-Transfer-Encoding: binary");
+        header("Content-Length: " . filesize($dir . $fn));
+        header("Content-Disposition: attachment; filename=\"" . $fn . "\"");
+        readfile($dir . $fn);
+        header("Expires: 0");
+        header("Cache-Control: no-cache, must-revalidate");
+        header("Pragma: no-cache");
+        return TRUE;
+    } else return FALSE;
+}
+
+function filesRemove($fn) {
+    $dir = getcwd();
+    global $uplDir;
+    $dir .= $uplDir;
+    if (is_dir($dir) && is_file($dir . $fn)) {
+        unlink($dir . $fn);
+        return TRUE;
+    } else return FALSE;
 }
 
 function filesUpload($fn, $fname) {
 
     $result = '';
-    if(is_uploaded_file($fn))//Проверяем, загружен ли файл
-    {
+    if (is_uploaded_file($fn)) {//Проверяем, загружен ли файл
 
-        global $uplDir;         // будем сохранять загружаемые файлы в эту директорию
-        $uploaddir = getcwd() . $uplDir;        // имя файла оставим неизменным
+        global $uplDir;         // будем сохранять загружаемые файлы в эту директорию; имя файла оставим неизменным
+        $uploaddir = getcwd() . $uplDir;
+        if (!file_exists($uploaddir))
+            mkdir($uploaddir);
         $destination = $uploaddir . $fname;
 
         // перемещаем файл из временной папки в выбранную директорию для хранения
-        if (move_uploaded_file( $fn, $destination))
-        {
+        if (move_uploaded_file($fn, $destination)) {
             //print "Файл успешно загружен <br>";
             //$result = false;
-        }
-        else
-        {
-            $result = "Произошла ошибка при загрузке файла. Некоторая отладочная информация:<br>".
-            print_r($_FILES);
+        } else {
+            $result = "Произошла ошибка при загрузке файла. Некоторая отладочная информация:<br>" .
+                    print_r($_FILES);
         }
 
         header("Location:index.php");
     }
-
 }
 
 ?>
