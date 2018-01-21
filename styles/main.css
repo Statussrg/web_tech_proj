@@ -127,12 +127,6 @@ ul{list-style-type: none;}
 
 /*  */
 
-#nav-top{
-    padding: 5px 0;
-    /*min-height: 30px;*/
-    /*border: 1px solid #999;*/
-    font:  90% sans-serif;
-}
 #centerblock{
     background: #fff;
     border-top: 0;
@@ -158,23 +152,65 @@ ul{list-style-type: none;}
     background:-ms-linear-gradient(top, #fff 0, #ddd 2px, #fff 98%, #999);
 }
 /*****************/
+#nav-top{
+    padding: 5px 5px 0;
+    /*position: relative;*/
+    /*min-height: 30px;*/
+    /*border: 1px solid #999;*/
+    /*font:  90% sans-serif;*/
+    /*vertical-align: bottom;*/
+    line-height: 1.5em;
+    overflow: hidden;
+}
+
 #menu-top{
     display: inline-block;
-    padding: 0 ;
+    /*position: relative;*/
+    /*bottom: 0;*/
+    padding: 0;
+    /*padding-bottom: 5px;*/
     margin: 0;
-    font: bold 90% sans-serif;
+    /*font: bold 1em sans-serif;    */
+    /*border: 1px solid black;*/
 }
 #menu-top > li{
     display: inline-block;
+    border: 0;
     border-right: 1px solid #999;
-    padding: 0 5px;
-    margin: 0;
+    padding: 1px 5px;
+    margin: 0 5px;
     float: left;
+    /* vertical-align: bottom;*/
 }
 #menu-top > li:hover{
-    /*cursor: pointer;
-    color: blue;
-    text-decoration: underline;*/
+    background: #ddd;
+    padding: 0 4px 0 5px;
+    border: 1px solid #999;
+}
+
+#menu-top > li.sel{
+    background: #fff;
+    padding: 0 5px 0;
+    border: 1px solid #999;
+}
+
+#search_form{
+    margin: 0;
+    padding: 0;
+    /*padding-bottom: 5px;*/
+    display: inline-block;
+    float: right;
+    /*border: 1px solid black;*/
+}
+#search_form > input[type="submit"] {
+    display: inline-block; 
+    background: url(../images/forward.png); 
+    width: 18px; 
+    height: 18px; 
+    border: 0; 
+    cursor: pointer; 
+    position: relative;
+    top: 3px;
 }
 
 /***********************************/
@@ -243,8 +279,15 @@ ul{list-style-type: none;}
     margin: 5px 5px 0 5px;
     /*width: 100%;*/
     /*text-align: center;*/
-    /*background: #ddd;*/
+    /*background: #ddd;*/    
 }
+
+#content > p{
+    margin: 5px;
+    padding: 5px;
+    line-height: 1.5em;
+}
+
 #info{
     display: block;
     border: 0; /*1px solid #999;*/

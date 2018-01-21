@@ -95,21 +95,18 @@ function htmlGetFormUpload(){
 }
 
 function htmlGetTopMenuSearch($loggedIn) {
+    $param = filter_input(INPUT_GET, 'page');
     $topMenu = '<div id="nav-top" class="minWidth gradient">
-                    <div style="border: 0; display: inline-block; margin: 5px;">
-                        <ul id="menu-top">
-                            <li><a href="./">На главную</a></li>
-                            <li><a href="?page=files">Файлы</a></li>
-                            <li><a href="?page=weather">Погода</a></li>                            
-                        </ul>
-                    </div>
-                    <div style="margin: 5px; display: inline-block; float: right; border:0;">
-                        <form method="get" action="index.php" onsubmit="return checkSearch(this);">
-                            <label>Поиск: <input name="search_str" style="display: inline-block; height: 1.1em; font: 0.8em sans-serif;" type="text" value ="'.filter_input(INPUT_GET, 'search_str').'" /></label>
-                            <!--div style="display: inline-block; background: url(./images/forward.png); width: 18px; height: 18px; border: 0; "></div-->
-                            <input type="submit" value="" style="display: inline-block; background: url(./images/forward.png); width: 18px; height: 18px; border: 0; cursor: pointer; " '.($loggedIn ? '': 'disabled').'/>
-                        </form>
-                    </div>
+                    <ul id="menu-top">
+                        <li class="'.($param==''? 'sel': '').'"><a href="./">На главную</a></li>
+                        <li class="'.($param=='files'? 'sel': '').'"><a href="?page=files">Файлы</a></li>
+                        <li class="'.($param=='weather'? 'sel': '').'"><a href="?page=weather">Погода</a></li>                            
+                    </ul>
+                    <form method="get" action="index.php" onsubmit="return checkSearch(this);" id="search_form">
+                        <label>Поиск: <input name="search_str" style="display: inline-block; height: 1.1em; font: 0.8em sans-serif;" type="text" value ="'.filter_input(INPUT_GET, 'search_str').'" /></label>
+                        <input type="hidden" name="page" value="'.filter_input(INPUT_GET, 'page').'"/>    
+                        <input type="submit" value="" '.($loggedIn ? '': 'disabled').'/>
+                    </form>
                 </div>';
     return $topMenu;
 }
@@ -118,8 +115,7 @@ function htmlGetContent($loggedIn) {
     $param = filter_input(INPUT_GET, 'page');
     //$title;
     //$list;
-    switch ($param)
-    {
+    switch ($param)    {
         case 'files':
             $title = 'Список файлов';
             $list = ($loggedIn ? filesGetList(filter_input(INPUT_GET, 'search_str')) : '<h3>Просмотр файлов доступен только зарегистрированным</h3>');
@@ -134,12 +130,11 @@ function htmlGetContent($loggedIn) {
             $title = 'Инфо';
             $reg = $loggedIn ? 'зарегистрироваться': '<a class="creglnk" href="#">зарегистрироваться</a>';
             $log = $loggedIn ? 'войти' : '<a class="cloglnk" href="#">войти</a>';
-            $list = 'Данный сайт позволяет хранить <a href="?page=files">файлы</a> для '.
+            $list = '<p>Данный сайт позволяет хранить <a href="?page=files">файлы</a> для '.
                     'общего доступа. Для работы необходимо '.$reg.' или '.$log.' под своими учетными данными.<br/>'.
-                    'Также можно посмотреть <a href="?page=weather">прогноз погоды</a>.';
+                    'Также можно посмотреть <a href="?page=weather">прогноз погоды</a>.</p>';
             $view_opts = FALSE;            
-            break;
-    }
+            break;    }
     $content = '
         <div id="centerblock" class="minWidth">
             <div id="nav-left">'. htmlGetMenuLeft().
@@ -151,9 +146,9 @@ function htmlGetContent($loggedIn) {
                         <a class="view_b" href="#">Блоками</a>
                     </div>' : '').
                 '</div>
-                <ul id="info" class="info_b">'
+                '
                 .$list.
-                '</ul>
+                '
             </div>
         </div>' ;
     return $content;

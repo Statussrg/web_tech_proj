@@ -40,10 +40,10 @@ function filesGetList($search_str) {
     $dir = getcwd();
     global $uplDir;
     $dir .= $uplDir;
-    $fileList = '';
     if (is_dir($dir)) {
         $i = 0;
         if (($dh = opendir($dir)) !== false) {
+            $fileList = '<ul id="info" class="info_b">';
             while (($file = readdir($dh)) !== false) {
                 if ($file == '.' || $file == '..')
                     continue;
@@ -55,16 +55,18 @@ function filesGetList($search_str) {
                         . "<a href=\"?delfile=" . ($file) . "\">Удалить</a>"
                         . "</li>";
             }
+            $fileList .= '<li><a class="upllnk" href ="#">Загрузить ещё файл</a></li>';
+            $fileList .= '</ul>';
+
         }
         closedir($dh);
 
         if ($i < 1) {
-            $fileList .= '<li>no files</li>';
+            $fileList .= '<p>Нет файлов для отображения</p>';
         }
     }
-    $fileList .= '<li><a class="upllnk" href ="#">Загрузить ещё файл</a></li></ul>';
     if ($search_str)
-        $fileList .= '<a href ="./index.php">Показать все</a>';
+        $fileList .= '<p><a href ="?page=files">Показать все</a></p>';
     return $fileList;
 }
 
