@@ -20,9 +20,11 @@
 
             function checkInput(form)
             {
+                ///alert('eeee');
                 err = checkLogin(form.userLogin.value);
                 err += checkName(form.userName.value);
                 err += checkPasw(form.userPasw.value);
+                err += checkPaswEq(form.userPasw.value, form.userPaswС.value);
                 err += checkEmail(form.userMail.value);
                 if (err == "")
                     return true;
@@ -39,7 +41,8 @@
                     return "В логине должно быть не менее 5 символов.\n";
                 else if (/[^a-zA-Z0-9_-]/.test(field))
                     return "В логине разрешены только a-z, A-Z, 0-9, - и _.\n";
-                else return "";
+                else
+                    return "";
 
             }
 
@@ -57,7 +60,13 @@
                 else if (!/[a-z]/.test(field) || !/[A-Z]/.test(field) ||
                         !/[0-9]/.test(field))
                     return "Пароль требует 1 символа из каждого набора a-z, A-Z и 0-9.\n";
-                else return "";
+                else
+                    return "";
+            }
+
+            function checkPaswEq(field1, field2)
+            {                
+                return (field1 != field2) ? "Пароли не совпадают.\n" :"";                
             }
 
             function checkEmail(field) {
@@ -67,13 +76,14 @@
                         (field.indexOf("@") > 0)) ||
                         /[^a-zA-Z0-9.@_-]/.test(field))
                     return "Электронный адрес имеет неверный формат.\n";
-                else return "";
+                else
+                    return "";
             }
         </script>
     </head>
     <body>        
         <div style="border: 0 /*1px solid black*/; text-align: right; width: 400px;">
-            <form action="register.php" method="POST" onsubmit="return checkInput(this)">
+            <form action="reg_chk.php" method="POST" onsubmit="return checkInput(this)">
                 <fieldset>
                     <legend>Регистрация на сайте</legend> 
                     <table cellspacing="5px">
@@ -86,6 +96,9 @@
                         <tr>
                             <td>Пароль:</td><td><input type="password" name="userPasw" required="required" placeholder="Введите пароль" size="25"/></td>
                         </tr>
+                        <tr>
+                            <td>Повторите пароль:</td><td><input type="password" name="userPaswС" required="required" placeholder="Введите пароль ещё раз" size="25"/></td>
+                        </tr>                        
                         <tr>
                             <td>Электронная почта:</td><td><input type="text" name="userMail" required="required" placeholder="Введите адрес почты" size="50"/></td>
                         </tr>
