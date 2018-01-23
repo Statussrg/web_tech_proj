@@ -20,10 +20,13 @@ function htmlGetHead() {
                     '<title>'.$sitename.'</title>' .
                     '<script src="./scripts/jquery.js"></script>' .
                     '<script src="./scripts/func.js"></script>' .
-                    '<script>$(\'document\').ready(function() { setHandlers(); });</script>' .
+                    '<script src="./scripts/jquery.snow.js"></script>' .
+                    '<script>$(\'document\').ready(function() { setHandlers(); });</script>' . 
+                    //'<script>  $(document).ready( function(){   $.fn.snow({ maxSize: 25, newOn: 1000, flakeColor : ["#9aedff"]});        });    </script>'.
                     '<link rel="shortcut icon" href=".images/favicon.png">' .
                     '<style type="text/css">' .
                     '@import "./styles/main.css" screen; /* Стиль для вывода результата на монитор */' .
+                    '.flake {border:0;}'.
                     '</style>' .
                 '</head><body>';
     return $header;
@@ -68,6 +71,9 @@ function htmlGetFormRegister() {
                     <label>Пароль: <input type="password" name="userPasw" required="required" placeholder="Введите пароль" size="25"/></label>
                     <label>Повторите пароль: <input type="password" name="userPaswС" required="required" placeholder="Введите пароль ещё раз" size="25"/></label>
                     <label>Имя: <input type="text" name="userName" placeholder="Введите имя пользователя" size="50"/></label>
+                    <label>Фамилия: <input type="text" name="userFIO" placeholder="Введите фамилию пользователя" size="50"/></label>
+                    <label>Отчество: <input type="text" name="userOTCH" placeholder="Введите отчество пользователя" size="50"/></label>
+                    <label>Дата рождения: <input type="text" name="userAGE" required="required" placeholder="Введите дату рождения" size="30"/></label>
                     <label>Электронная почта: <input type="text" name="userMail" required="required" placeholder="Введите адрес почты" size="50"/></label>
                     <input type="submit" value="Зарегистрировать" />
                     <input type="hidden" name="regFrm" value="y" />
@@ -113,16 +119,17 @@ function htmlGetTopMenuSearch($loggedIn) {
 
 function htmlGetContent($loggedIn) {
     $param = filter_input(INPUT_GET, 'page');
+    $lnk = '<br/><a class="cloglnk" href="#">Войти</a><br/><a class="creglnk" href="#">Зарегистрироваться</a>';
     switch ($param)    {
         case 'files':
             $title = 'Список файлов';
-            $list = ($loggedIn ? filesGetList(filter_input(INPUT_GET, 'search_str')) : '<p>Просмотр файлов доступен только зарегистрированным</p>');
+            $list = ($loggedIn ? filesGetList(filter_input(INPUT_GET, 'search_str')) : '<p>Просмотр файлов доступен только зарегистрированным '.$lnk.'</p>');
             $view_opts = TRUE;
             break;
         case 'weather':
             $title = 'Прогноз погоды';
             $list = htmlGetWeather();
-            $view_opts = TRUE;
+            $view_opts = FALSE;
             break;
         case 'personal':
             $title = 'Персональная страница';
